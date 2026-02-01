@@ -1,17 +1,16 @@
-// function ErrorBoundary() {
-//   return (
-//     <>
+import  { Component, ErrorInfo, ReactNode } from 'react';
 
-//     </>
-//   )
-// }
+interface Props {
+  children?: ReactNode;
+}
 
-// export default ErrorBoundary
-
-import React from 'react';
-
-class ErrorBoundary extends React.Component {
-  constructor(props) {
+interface State {
+  hasError: boolean;
+  error: Error | null;
+  errorInfo: ErrorInfo | null;
+}
+class ErrorBoundary extends Component<Props, State>  {
+  constructor(props: Props) {
     super(props);
     this.state = { 
       hasError: false,
@@ -20,13 +19,12 @@ class ErrorBoundary extends React.Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_: Error) {
     // Обновляем state, чтобы следующий рендер показал fallback UI
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
-    // Логируем ошибку в консоль
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary поймал ошибку:', error, errorInfo);
     
     // Сохраняем детали ошибки в state для отображения
