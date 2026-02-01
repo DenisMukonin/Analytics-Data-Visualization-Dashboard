@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import  { createContext, useState, useCallback, useContext } from 'react';
 
 // Создаём контекст
 export const DashboardContext = createContext('');
@@ -106,7 +106,7 @@ export function DashboardProvider({ children }) {
 
 // Custom hook для использования контекста
 export function useDashboard() {
-  const context = React.useContext(DashboardContext);
+  const context = useContext(DashboardContext);
   
   if (!context) {
     throw new Error('useDashboard должен использоваться внутри DashboardProvider');
