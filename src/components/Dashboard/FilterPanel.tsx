@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import { useDashboard } from '@/context/DashboardContext'
-import { FilterState } from '@/types'
+import type { FilterState } from '@/types'
 import { format, subDays } from 'date-fns'
 
 interface FilterPanelProps {
-  onaFilterChange?: (filters: FilterState) => void
+  onFilterChange?: (filters: FilterState) => void
 }
 
 export function FilterPanel({ onFilterChange }: FilterPanelProps) {
@@ -36,9 +36,9 @@ export function FilterPanel({ onFilterChange }: FilterPanelProps) {
       const newFilters: FilterState = {
         ...filters,
         dateRange: preset.getValue(),
-      };
-      setFilters(newFilters);
-      onFilterChange?.(newFilters);
+      }
+      setFilters(newFilters)
+      onFilterChange?.(newFilters)
     },
     [filters, setFilters, onFilterChange]
   )
@@ -52,9 +52,9 @@ export function FilterPanel({ onFilterChange }: FilterPanelProps) {
       const newFilters: FilterState = {
         ...filters,
         selectedMetrics: newMetrics,
-      };
-      setFilters(newFilters);
-      onFilterChange?.(newFilters);
+      }
+      setFilters(newFilters)
+      onFilterChange?.(newFilters)
     },
     [filters, setFilters, onFilterChange]
   )
@@ -66,7 +66,6 @@ export function FilterPanel({ onFilterChange }: FilterPanelProps) {
 <div className="bg-white rounded-lg shadow-md p-6 mb-6">
       <h2 className="font-bold text-lg mb-4">Фильтры</h2>
 
-      {/* Дата ранж */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold mb-2">Период</h3>
         <div className="flex gap-2 mb-4">
@@ -105,7 +104,6 @@ export function FilterPanel({ onFilterChange }: FilterPanelProps) {
         </div>
       </div>
 
-      {/* Выбор метрик */}
       <div>
         <h3 className="text-sm font-semibold mb-2">Метрики</h3>
         <div className="flex flex-wrap gap-2">
