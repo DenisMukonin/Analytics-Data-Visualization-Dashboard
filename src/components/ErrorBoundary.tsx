@@ -1,40 +1,40 @@
-import  { Component, ErrorInfo, ReactNode } from 'react';
+import  { Component, type ErrorInfo, type ReactNode } from 'react'
 
 interface Props {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 interface State {
-  hasError: boolean;
-  error: Error | null;
-  errorInfo: ErrorInfo | null;
+  hasError: boolean
+  error: Error | null
+  errorInfo: ErrorInfo | null
 }
 class ErrorBoundary extends Component<Props, State>  {
   constructor(props: Props) {
-    super(props);
+    super(props)
     this.state = { 
       hasError: false,
       error: null,
       errorInfo: null 
-    };
+    }
   }
 
   static getDerivedStateFromError(_: Error) {
     // Обновляем state, чтобы следующий рендер показал fallback UI
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary поймал ошибку:', error, errorInfo);
+    console.error('ErrorBoundary поймал ошибку:', error, errorInfo)
     
     // Сохраняем детали ошибки в state для отображения
     this.setState({
       error,
       errorInfo
-    });
+    })
 
     // Отправляем на сервис мониторинга (например, Sentry)
-    // logErrorToService(error, errorInfo);
+    // logErrorToService(error, errorInfo)
   }
 
   render() {
@@ -49,31 +49,21 @@ class ErrorBoundary extends Component<Props, State>  {
           color: '#c92a2a'
         }}>
           <h2>⚠️ Что-то пошло не так</h2>
-          <details style={{ whiteSpace: 'pre-wrap', marginTop: '10px' }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
-            {this.state.errorInfo?.componentStack}
-          </details>
-          <button 
+          <p className="text-red-600 text-sm mb-4">{this.state.error?.message}</p>
+          <p className="text-gray-500 text-xs mb-4">{this.state.errorInfo?.componentStack}</p>
+          
+          <button
             onClick={() => window.location.reload()}
-            style={{
-              marginTop: '15px',
-              padding: '10px 20px',
-              backgroundColor: '#ff6b6b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
           >
-            🔄 Перезагрузить страницу
+            Обновить страницу
           </button>
         </div>
-      );
+      )
     }
 
     return (<>{this.props.children}</>)
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary
