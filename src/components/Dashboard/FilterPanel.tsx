@@ -68,16 +68,19 @@ export function FilterPanel({ onFilterChange }: FilterPanelProps) {
 
       <div className="mb-6">
         <h3 className="text-sm font-semibold mb-2">Период</h3>
-        <div className="flex gap-2 mb-4">
-          {dateRangePresets.map((preset) => (
-            <button
-              key={preset.label}
-              onClick={() => handlePreset(preset)}
-              className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded text-sm"
-            >
-              {preset.label}
-            </button>
-          ))}
+
+        <div className='flex gap-2 mb-4'> 
+          {
+            dateRangePresets.map((preset) => (
+              <button
+                key={preset.label}
+                onClick={() => handlePreset(preset)}
+                className='px-4 py-2 bg-gray-100 rounded text-sm hover:bg-gray-200'
+              >
+                {preset.label}
+              </button>
+            ))
+          }
         </div>
 
         <div className="flex gap-4">
