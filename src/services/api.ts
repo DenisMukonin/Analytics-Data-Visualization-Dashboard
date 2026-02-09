@@ -1,10 +1,10 @@
 import axios, { type AxiosInstance, AxiosError } from 'axios'
 import type { ApiResponse, ApiError, FilterState, Metric, DashboardConfig } from '@/types'
-import { API_URL } from '@/config/env';
-
+// import { API_URL } from '@/config/env';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 class ApiClient {
   private client: AxiosInstance
-
+  
   constructor(baseURL: string) {
     this.client = axios.create({
       baseURL,
@@ -13,6 +13,7 @@ class ApiClient {
         'Content-Type': 'application/json'
       }
     })
+    
 
     // Перехватываем все ошибки
     this.client.interceptors.response.use(

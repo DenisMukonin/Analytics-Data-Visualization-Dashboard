@@ -4,7 +4,7 @@ import { useDashboard } from '@/context/DashboardContext';
 import { apiClient } from '@/services/api';
 import { FilterPanel } from './FilterPanel';
 import { DashboardGrid } from './DashboardGrid';
-import { ErrorBoundary } from '@/components/Common/ErrorBoundary';
+import  ErrorBoundary  from '@/components/ErrorBoundary';
 
 
 function Dashboard() {
